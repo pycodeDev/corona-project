@@ -1,0 +1,170 @@
+<div class="container">
+  <div class="my-2 text-center">
+    <h2 class="badge badge-danger">
+      Covid 19 di Indonesia <fa-icon [icon]="faVirus"></fa-icon>
+    </h2>
+    <h4>Data korona Indonesia</h4>
+  </div>
+  <hr />
+  <div class="row">
+    <div class="col-sm-12 col-md-6 col-lg-6 col-xl-4 my-1">
+      <div class="card-body bg-warning card-dashboard mat-elevation-z5">
+        <div class="d-flex">
+          <div class="text-white">
+            <p class="text-white mb-0">Total Positif</p>
+            <h2 class="mb-0 number-font">{{ positif }}</h2>
+            <p class="text-white mb-0">Jiwa</p>
+          </div>
+          <div class="ml-auto iconSize my-auto text-white">
+            <!-- <fa-icon [icon]="faUserCheck"></fa-icon> -->
+            <img
+              src="https://image.flaticon.com/icons/svg/2927/2927562.svg"
+              alt="Infeksi Korona"
+              width="50"
+              height="50"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-12 col-md-6 col-lg-6 col-xl-4 my-1">
+      <div class="card-body bg-danger card-dashboard mat-elevation-z5">
+        <div class="d-flex">
+          <div class="text-white">
+            <p class="text-white mb-0">Total Meninggal</p>
+            <h2 class="mb-0 number-font">{{ meninggal }}</h2>
+            <p class="text-white mb-0">Jiwa</p>
+          </div>
+          <div class="ml-auto iconSize my-auto text-white">
+            <!-- <fa-icon [icon]="faUserCheck"></fa-icon> -->
+            <img
+              src="https://image.flaticon.com/icons/svg/2927/2927432.svg"
+              alt="meninggal"
+              width="50"
+              height="50"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-12 col-md-6 col-lg-6 col-xl-4 my-1">
+      <div class="card-body bg-success card-dashboard mat-elevation-z5">
+        <div class="d-flex">
+          <div class="text-white">
+            <p class="text-white mb-0">Total Sembuh</p>
+            <h2 class="mb-0 number-font">{{ sembuh }}</h2>
+            <p class="text-white mb-0">Jiwa</p>
+          </div>
+          <div class="ml-auto iconSize my-auto text-white">
+            <!-- <fa-icon [icon]="faUserCheck"></fa-icon> -->
+            <img
+              src="https://image.flaticon.com/icons/svg/2927/2927398.svg"
+              alt="Sembuh"
+              width="50"
+              height="50"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-12 col-md-6 col-xl-12 my-3 text-center">
+      <p class="font-weight-lighter">
+        Berdasarkan Data Terakhir: {{ transDate(lastupdate) }}
+      </p>
+    </div>
+  </div>
+
+  <div class="row mb3">
+    <div class="col-sm-12 col-md-6 col-xl-12 my-3">
+      <div class="card mat-elevation-z5">
+        <div class="card-header bg-transparent">
+          <strong class="font-weight text-title-dash">
+            Penambahan Kasus Tanggal: {{ transDate(lastupdate) }}
+          </strong>
+        </div>
+        <div class="card-body">
+          <div class="row mt-6">
+            <div class="col text-center">
+              <h5 class="font-weight-normal mt-2">POSITIF</h5>
+              <h3 class="text-xxl mb-1 social-content number-font">
+                <strong class="text-danger">+</strong> {{ connow }}
+              </h3>
+              <p class="mb-0 text-muted">
+                <span class="text-lg font-weight-700"></span>ORANG
+              </p>
+            </div>
+            <div class="col text-center">
+              <h5 class="font-weight-normal mt-2">SEMBUH</h5>
+              <h3 class="text-xxl mb-1 social-content danger number-font">
+                <strong class="text-danger">+</strong> {{ recnow }}
+              </h3>
+              <p class="mb-0 text-muted">
+                <span class="text-lg font-weight-700"></span>ORANG
+              </p>
+            </div>
+            <div class="col text-center">
+              <h5 class="font-weight-normal mt-2">MENINGGAL</h5>
+              <h3 class="text-xxl mb-1 social-content number-font">
+                <strong class="text-danger">+</strong> {{ deanow }}
+              </h3>
+              <p class="mb-0 text-muted">
+                <span class="text-lg font-weight-700"></span>ORANG
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row mb-3">
+    <div class="col-sm-12 col-md-12 col-lg-12 col-xl-14">
+      <div class="card mat-elevation-z5">
+        <div class="card-header bg-transparent">
+          <strong class="font-weight text-title-dash">
+            Perkembangan Kasus Corona virus di Indonesia</strong
+          >
+        </div>
+        <div class="card-body">
+          <div class="table-responsive">
+            <table
+              class="table table-bordered mb-0 text-nowrap"
+              style="margin-bottom: 0;"
+            >
+              <!-- <thead> -->
+              <tr>
+                <td class="text-center font-weight-bolder text-uppercase">
+                  No
+                </td>
+                <td class="text-center font-weight-bolder text-uppercase">
+                  Tanggal
+                </td>
+                <td class="text-center font-weight-bolder text-uppercase">
+                  Positif
+                </td>
+                <td class="text-center font-weight-bolder text-uppercase">
+                  Sembuh
+                </td>
+                <td class="text-center font-weight-bolder text-uppercase">
+                  Meninggal
+                </td>
+              </tr>
+              <!-- </thead> -->
+              <!-- <tbody> -->
+              <tr *ngFor="let data of lstdata; let i = index">
+                <td>{{ i + 1 }}</td>
+                <td>{{ transDate(data.Date) }}</td>
+                <td>{{ data.Confirmed }}</td>
+                <td>{{ data.Recovered }}</td>
+                <td>{{ data.Deaths }}</td>
+              </tr>
+
+              <!-- </tbody> -->
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- COL END -->
+  </div>
+</div>

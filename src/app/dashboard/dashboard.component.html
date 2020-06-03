@@ -1,0 +1,238 @@
+<div class="container">
+  <div class="my-2 text-center">
+    <h2 class="badge badge-danger">
+      Covid 19 di Dunia <fa-icon [icon]="faVirus"></fa-icon>
+    </h2>
+    <h4>Data korona Global</h4>
+  </div>
+  <hr />
+  <div class="row">
+    <div class="col-sm-12 col-md-6 col-lg-6 col-xl-4 my-1">
+      <div class="card-body bg-warning card-dashboard mat-elevation-z5">
+        <div class="d-flex">
+          <div class="text-white">
+            <p class="text-white mb-0">Total Positif Global</p>
+            <h2 class="mb-0 number-font" *ngIf="lstpositif | async as lst">
+              {{ lst.TotalConfirmed }}
+            </h2>
+            <p class="text-white mb-0">Jiwa</p>
+          </div>
+          <div class="ml-auto iconSize my-auto text-white">
+            <!-- <fa-icon [icon]="faUserCheck"></fa-icon> -->
+            <img
+              src="https://image.flaticon.com/icons/svg/2927/2927562.svg"
+              alt="Infeksi Korona"
+              width="50"
+              height="50"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-12 col-md-6 col-lg-6 col-xl-4 my-1">
+      <div class="card-body bg-danger card-dashboard mat-elevation-z5">
+        <div class="d-flex">
+          <div class="text-white">
+            <p class="text-white mb-0">Total Meninggal</p>
+            <h2 class="mb-0 number-font" *ngIf="lstpositif | async as lst">
+              {{ lst.TotalDeaths }}
+            </h2>
+            <p class="text-white mb-0">Jiwa</p>
+          </div>
+          <div class="ml-auto iconSize my-auto text-white">
+            <!-- <fa-icon [icon]="faUserCheck"></fa-icon> -->
+            <img
+              src="https://image.flaticon.com/icons/svg/2927/2927432.svg"
+              alt="meninggal"
+              width="50"
+              height="50"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-12 col-md-6 col-lg-6 col-xl-4 my-1">
+      <div class="card-body bg-success card-dashboard mat-elevation-z5">
+        <div class="d-flex">
+          <div class="text-white">
+            <p class="text-white mb-0">Total Sembuh</p>
+            <h2 class="mb-0 number-font" *ngIf="lstpositif | async as lst">
+              {{ lst.TotalRecovered }}
+            </h2>
+            <p class="text-white mb-0">Jiwa</p>
+          </div>
+          <div class="ml-auto iconSize my-auto text-white">
+            <!-- <fa-icon [icon]="faUserCheck"></fa-icon> -->
+            <img
+              src="https://image.flaticon.com/icons/svg/2927/2927398.svg"
+              alt="Sembuh"
+              width="50"
+              height="50"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-12 col-md-6 col-xl-12 my-3 text-center">
+      <p class="font-weight-lighter">
+        Berdasarkan Data Terakhir: 30 Mei 2020 17:31:00 WIB
+      </p>
+    </div>
+  </div>
+
+  <div class="row mb-3">
+    <div class="col-sm-12 col-md-12 col-lg-12 col-xl-14">
+      <div class="card mat-elevation-z5">
+        <div class="card-header bg-transparent">
+          <strong class="font-weight text-title-dash">
+            Data Kasus Coronavirus Global</strong
+          >
+        </div>
+        <div class="card-body">
+          <div class="table-responsive">
+            <table
+              class="table table-bordered mb-0 text-nowrap"
+              style="margin-bottom: 0;"
+            >
+              <!-- <thead> -->
+              <tr>
+                <td
+                  class="text-center font-weight-bolder text-uppercase"
+                  style="width: 50px;"
+                >
+                  No.
+                </td>
+                <td class="text-center font-weight-bolder text-uppercase">
+                  Negara
+                </td>
+                <td class="text-center font-weight-bolder text-uppercase">
+                  Positif
+                </td>
+                <td class="text-center font-weight-bolder text-uppercase">
+                  Sembuh
+                </td>
+                <td class="text-center font-weight-bolder text-uppercase">
+                  Meninggal
+                </td>
+              </tr>
+              <!-- </thead> -->
+              <!-- <tbody> -->
+              <tr *ngFor="let data of lstdata; let i = index">
+                <td style="width: 50px;">{{ i + 1 }}</td>
+                <td>{{ data.Country }}</td>
+                <td>{{ data.TotalConfirmed }}</td>
+                <td>{{ data.TotalRecovered }}</td>
+                <td>{{ data.TotalDeaths }}</td>
+              </tr>
+              <!-- </tbody> -->
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- COL END -->
+  </div>
+
+  <div class="row mb-3">
+    <div class="col-sm-12 col-md-12 col-lg-12 col-xl-14">
+      <div class="card mat-elevation-z5">
+        <div class="card-header bg-transparent">
+          <strong class="font-weight text-title-dash"> Cari Negara</strong>
+        </div>
+        <div class="card-body">
+          <!-- <form (submit)="getSelectData(taskTitle.value); taskTitle.value = ''"> -->
+          <select
+            class="form-control"
+            [(ngModel)]="optselected"
+            (ngModelChange)="getSelectData($event)"
+          >
+            <option [value]="data.Country" *ngFor="let data of lstdata">
+              {{ data.Country }}
+            </option>
+          </select>
+
+          <!-- {{ optselected }} -->
+          <div *ngIf="sign; then content; else other_content">
+            here is ignored
+          </div>
+          <ng-template #content>
+            <div class="table-responsive">
+              <table
+                class="table table-bordered my-2 text-nowrap"
+                style="margin-bottom: 0;"
+              >
+                <!-- <thead> -->
+                <tr>
+                  <td class="text-center font-weight-bolder text-uppercase">
+                    Tanggal
+                  </td>
+                  <td class="text-center font-weight-bolder text-uppercase">
+                    Negara
+                  </td>
+                  <td class="text-center font-weight-bolder text-uppercase">
+                    Positif
+                  </td>
+                  <td class="text-center font-weight-bolder text-uppercase">
+                    Sembuh
+                  </td>
+                  <td class="text-center font-weight-bolder text-uppercase">
+                    Meninggal
+                  </td>
+                </tr>
+                <!-- </thead> -->
+                <!-- <tbody> -->
+                <tr *ngFor="let data of lstsel">
+                  <td>{{ transDate(data.Date.split("T")[0]) }}</td>
+                  <td>{{ data.Country }}</td>
+                  <td>{{ data.Confirmed }}</td>
+                  <td>{{ data.Recovered }}</td>
+                  <td>{{ data.Deaths }}</td>
+                </tr>
+                <!-- </tbody> -->
+              </table>
+            </div>
+          </ng-template>
+          <ng-template #other_content>
+            <div class="table-responsive">
+              <table
+                class="table table-bordered my-2 text-nowrap"
+                style="margin-bottom: 0;"
+              >
+                <!-- <thead> -->
+                <tr>
+                  <td class="text-center font-weight-bolder text-uppercase">
+                    Tanggal
+                  </td>
+                  <td class="text-center font-weight-bolder text-uppercase">
+                    Negara
+                  </td>
+                  <td class="text-center font-weight-bolder text-uppercase">
+                    Positif
+                  </td>
+                  <td class="text-center font-weight-bolder text-uppercase">
+                    Sembuh
+                  </td>
+                  <td class="text-center font-weight-bolder text-uppercase">
+                    Meninggal
+                  </td>
+                </tr>
+                <!-- </thead> -->
+                <!-- <tbody> -->
+                <tr>
+                  <td colspan="5">
+                    <strong class="text-danger"
+                      >Silahkan Pilih Negara Untuk Melihat Perkembangan Covid Di
+                      Negara Yang Dipilih!!!</strong
+                    >
+                  </td>
+                </tr>
+                <!-- </tbody> -->
+              </table>
+            </div>
+          </ng-template>
+        </div>
+      </div>
+    </div>
+    <!-- COL END -->
+  </div>
+</div>
